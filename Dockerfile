@@ -77,12 +77,13 @@ RUN apt-get update \
     && docker-php-ext-enable mcrypt
     
 #Install SOAP extension for PHP
-RUN apt-get update -y \
-  && apt-get install -y \
-    libxml2-dev \
-    php-soap \
-  && apt-get clean -y \
-  && docker-php-ext-install soap
+RUN if [ ${INSTALL_SOAP} = true ]; then \
+    # Install the soap extension
+    rm /etc/apt/preferences.d/no-debian-php && \
+    apt-get update -yqq && \
+    apt-get -y install libxml2-dev php-soap && \
+    docker-php-ext-install soap \
+;fi
 
 # install odbc php ext
 RUN apt-get update \
