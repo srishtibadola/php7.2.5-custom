@@ -75,6 +75,14 @@ RUN apt-get update \
         xsl \
     && docker-php-ext-enable imagick \
     && docker-php-ext-enable mcrypt
+    
+#Install SOAP extension for PHP
+RUN apt-get update -y \
+  && apt-get install -y \
+    libxml2-dev \
+    php-soap \
+  && apt-get clean -y \
+  && docker-php-ext-install soap
 
 # install odbc php ext
 RUN apt-get update \
