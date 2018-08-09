@@ -146,4 +146,7 @@ ENV PATH ${PATH}:/home/site/wwwroot
 
 WORKDIR /var/www/html
 
+COPY hostingstart.html /home/site/wwwroot/hostingstart.html
+COPY test.html /home/site/wwwroot/test.html
+
 ENTRYPOINT ["/bin/init_container.sh"]
